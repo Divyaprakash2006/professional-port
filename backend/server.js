@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -8,12 +9,26 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:5000', 'http://localhost:3001', 'http://127.0.0.1:49675'],
+  origin: process.env.NODE_ENV === 'production'
+    ? true // Allow all origins in production (Render will set specific domain)
+    : ['http://localhost:3000', 'http://localhost:5000', 'http://localhost:3001', 'http://127.0.0.1:49675'],
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type'],
   credentials: true
 }));
 app.use(express.json());
+
+// Serve static files in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../build')));
+
+  // Handle React Router - send all non-API requests to index.html
+  app.get('*', (req, res) => {
+    if (!req.path.startsWith('/api/')) {
+      res.sendFile(path.join(__dirname, '../build/index.html'));
+    }
+  });
+}
 
 // Email transporter configuration
 const createTransporter = () => {
