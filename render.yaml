@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: portfolio-backend
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    port: 5000
+    autoDeploy: false
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: EMAIL_USER
+        generateValue: true
+      - key: EMAIL_APP_PASS
+        generateValue: true
+      - key: RECIPIENT_EMAIL
+        generateValue: true
