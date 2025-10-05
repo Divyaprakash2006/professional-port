@@ -12,10 +12,10 @@
     "react-dom": "^18.2.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.9.3",
-    "react-scripts": "^5.0.1"
+    "react-scripts": "^5.0.1",
+    "@craco/craco": "^7.1.0"
   },
   "devDependencies": {
-    "@craco/craco": "^7.1.0",
     "concurrently": "^7.6.0",
     "cross-env": "^10.1.0",
     "prettier": "^3.6.2"
@@ -47,5 +47,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "engines": {
+    "node": "22.x"
   }
 }
