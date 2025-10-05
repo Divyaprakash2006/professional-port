@@ -3,8 +3,7 @@ services:
     name: portfolio-backend
     env: node
     buildCommand: npm install && npm run build
-    startCommand: npm start
-    port: 5000
+    startCommand: npm run server
     autoDeploy: false
     healthCheckPath: /api/health
     envVars:
