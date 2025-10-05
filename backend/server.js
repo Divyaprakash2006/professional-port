@@ -74,15 +74,14 @@ if (process.env.NODE_ENV === "production") {
 // Email transporter configuration
 const createTransporter = () => {
   return nodemailer.createTransport({
-    host: 'smtp.gmail.com',
+    host: 'smtp.sendgrid.net',
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_APP_PASS,
+      user: 'apikey', // SendGrid requires 'apikey' as username
+      pass: process.env.SENDGRID_API_KEY, // SendGrid API key as password
     },
     tls: {
-      ciphers: 'SSLv3',
       rejectUnauthorized: false,
     },
     // Connection settings for better reliability
@@ -118,8 +117,8 @@ app.post("/api/contact", async (req, res) => {
     const transporter = createTransporter();
 
     // Check if email is configured
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_APP_PASS) {
-      console.error("Email not configured - missing EMAIL_USER or EMAIL_APP_PASS");
+    if (!process.env.SENDGRID_API_KEY) {
+      console.error("Email not configured - missing SENDGRID_API_KEY");
       return res.status(500).json({
         success: false,
         message: "Email service not configured",
@@ -128,7 +127,7 @@ app.post("/api/contact", async (req, res) => {
 
     // Email options for notification to you
     const mailOptions = {
-      from: process.env.EMAIL_USER,
+      from: process.env.EMAIL_USER || 'noreply@yourdomain.com', // Use verified sender
       to: process.env.RECIPIENT_EMAIL || process.env.EMAIL_USER,
       subject: `🔔 New Portfolio Contact: ${name}`,
       html: `
@@ -170,7 +169,7 @@ app.post("/api/contact", async (req, res) => {
 
     // Auto-reply email options
     const autoReplyOptions = {
-      from: process.env.EMAIL_USER,
+      from: process.env.EMAIL_USER || 'noreply@yourdomain.com', // Use verified sender
       to: email,
       subject: "✅ Message Received - DIVYAPRAKASH V",
       html: `

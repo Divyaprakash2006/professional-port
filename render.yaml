@@ -9,9 +9,9 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
+      - key: SENDGRID_API_KEY
+        fromSecret: sendgrid_api_key
       - key: EMAIL_USER
         fromSecret: email_user
-      - key: EMAIL_APP_PASS
-        fromSecret: email_app_pass
       - key: RECIPIENT_EMAIL
         fromSecret: recipient_email
