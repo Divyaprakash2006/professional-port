@@ -28,12 +28,17 @@ app.use(express.json());
 
 // Serve static files in production
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../build")));
+  // On Render, build files are in the project root
+  const buildPath = path.join(__dirname, "../build");
+  console.log("Build path:", buildPath);
+  app.use(express.static(buildPath));
 
   // Handle React Router - send all non-API requests to index.html
   app.get("*", (req, res) => {
     if (!req.path.startsWith("/api/")) {
-      res.sendFile(path.join(__dirname, "../build/index.html"));
+      const indexPath = path.join(buildPath, "index.html");
+      console.log("Index path:", indexPath);
+      res.sendFile(indexPath);
     }
   });
 }
@@ -76,6 +81,15 @@ app.post("/api/contact", async (req, res) => {
 
     // Create transporter
     const transporter = createTransporter();
+
+    // Check if email is configured
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_APP_PASS) {
+      console.error("Email not configured - missing EMAIL_USER or EMAIL_APP_PASS");
+      return res.status(500).json({
+        success: false,
+        message: "Email service not configured",
+      });
+    }
 
     // Email options for notification to you
     const mailOptions = {
