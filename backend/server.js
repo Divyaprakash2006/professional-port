@@ -74,14 +74,21 @@ if (process.env.NODE_ENV === "production") {
 // Email transporter configuration
 const createTransporter = () => {
   return nodemailer.createTransport({
-    service: "gmail",
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, // true for 465, false for other ports
     auth: {
       user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_APP_PASS, // Use app-specific password instead of regular password
+      pass: process.env.EMAIL_APP_PASS,
     },
     tls: {
+      ciphers: 'SSLv3',
       rejectUnauthorized: false,
     },
+    // Connection settings for better reliability
+    connectionTimeout: 60000, // 60 seconds
+    greetingTimeout: 30000, // 30 seconds
+    socketTimeout: 60000, // 60 seconds
   });
 };
 
@@ -223,10 +230,22 @@ app.post("/api/contact", async (req, res) => {
     };
 
     // Send notification email
-    await transporter.sendMail(mailOptions);
+    try {
+      await transporter.sendMail(mailOptions);
+      console.log("✅ Notification email sent successfully");
+    } catch (emailError) {
+      console.error("❌ Notification email failed:", emailError.message);
+      // Continue with auto-reply even if notification fails
+    }
 
     // Send auto-reply email
-    await transporter.sendMail(autoReplyOptions);
+    try {
+      await transporter.sendMail(autoReplyOptions);
+      console.log("✅ Auto-reply email sent successfully");
+    } catch (emailError) {
+      console.error("❌ Auto-reply email failed:", emailError.message);
+      // Continue even if auto-reply fails
+    }
 
     res.status(200).json({
       success: true,
