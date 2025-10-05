@@ -5,11 +5,6 @@
   "homepage": ".",
   "dependencies": {
     "@craco/craco": "^7.1.0",
-    "@sendgrid/mail": "^8.1.6",
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "nodemailer": "^6.10.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.5.0",
@@ -19,23 +14,15 @@
   "devDependencies": {
     "@jridgewell/sourcemap-codec": "^1.5.5",
     "@rollup/plugin-terser": "^0.4.4",
-    "concurrently": "^7.6.0",
-    "cross-env": "^10.1.0",
     "prettier": "^3.6.2",
     "rimraf": "^6.0.1"
   },
   "scripts": {
-    "start": "cross-env PORT=5000 DANGEROUSLY_DISABLE_HOST_CHECK=true craco start",
-    "server": "node backend/server.js",
+    "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject",
-    "dev": "concurrently \"cross-env PORT=5001 npm run server\" \"cross-env PORT=5000 npm start\"",
-    "heroku-postbuild": "npm run build",
-    "postinstall": "npm run build",
-    "deploy": "npm run build && npm run server"
+    "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:5001",
   "eslintConfig": {
     "extends": [
       "react-app",
