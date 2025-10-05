@@ -1,31 +1,39 @@
-const express = require('express');
-const cors = require('cors');
-const nodemailer = require('nodemailer');
-const path = require('path');
-require('dotenv').config();
+const express = require("express");
+const cors = require("cors");
+const nodemailer = require("nodemailer");
+const path = require("path");
+require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors({
-  origin: process.env.NODE_ENV === 'production'
-    ? true // Allow all origins in production (Render will set specific domain)
-    : ['http://localhost:3000', 'http://localhost:5000', 'http://localhost:3001', 'http://127.0.0.1:49675'],
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type'],
-  credentials: true
-}));
+app.use(
+  cors({
+    origin:
+      process.env.NODE_ENV === "production"
+        ? true // Allow all origins in production (Render will set specific domain)
+        : [
+            "http://localhost:3000",
+            "http://localhost:5000",
+            "http://localhost:3001",
+            "http://127.0.0.1:49675",
+          ],
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+    credentials: true,
+  }),
+);
 app.use(express.json());
 
 // Serve static files in production
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../build')));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../build")));
 
   // Handle React Router - send all non-API requests to index.html
-  app.get('*', (req, res) => {
-    if (!req.path.startsWith('/api/')) {
-      res.sendFile(path.join(__dirname, '../build/index.html'));
+  app.get("*", (req, res) => {
+    if (!req.path.startsWith("/api/")) {
+      res.sendFile(path.join(__dirname, "../build/index.html"));
     }
   });
 }
@@ -33,19 +41,19 @@ if (process.env.NODE_ENV === 'production') {
 // Email transporter configuration
 const createTransporter = () => {
   return nodemailer.createTransport({
-    service: 'gmail',
+    service: "gmail",
     auth: {
       user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_APP_PASS // Use app-specific password instead of regular password
+      pass: process.env.EMAIL_APP_PASS, // Use app-specific password instead of regular password
     },
     tls: {
-      rejectUnauthorized: false
-    }
+      rejectUnauthorized: false,
+    },
   });
 };
 
 // Contact form endpoint
-app.post('/api/contact', async (req, res) => {
+app.post("/api/contact", async (req, res) => {
   try {
     const { name, email, message } = req.body;
 
@@ -53,7 +61,7 @@ app.post('/api/contact', async (req, res) => {
     if (!name || !email || !message) {
       return res.status(400).json({
         success: false,
-        message: 'All fields are required'
+        message: "All fields are required",
       });
     }
 
@@ -62,7 +70,7 @@ app.post('/api/contact', async (req, res) => {
     if (!emailRegex.test(email)) {
       return res.status(400).json({
         success: false,
-        message: 'Invalid email format'
+        message: "Invalid email format",
       });
     }
 
@@ -106,14 +114,14 @@ app.post('/api/contact', async (req, res) => {
             </p>
           </div>
         </div>
-      `
+      `,
     };
 
     // Auto-reply email options
     const autoReplyOptions = {
       from: process.env.EMAIL_USER,
       to: email,
-      subject: '✅ Message Received - DIVYAPRAKASH V',
+      subject: "✅ Message Received - DIVYAPRAKASH V",
       html: `
         <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background: #f8f9fa;">
           <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 30px; text-align: center;">
@@ -167,37 +175,41 @@ app.post('/api/contact', async (req, res) => {
             </p>
           </div>
         </div>
-      `
+      `,
     };
 
     // Send notification email
     await transporter.sendMail(mailOptions);
-    
+
     // Send auto-reply email
     await transporter.sendMail(autoReplyOptions);
 
     res.status(200).json({
       success: true,
-      message: 'Email sent successfully!'
+      message: "Email sent successfully!",
     });
-
   } catch (error) {
-    console.error('Email sending error:', error);
+    console.error("Email sending error:", error);
     res.status(500).json({
       success: false,
-      message: 'Failed to send email. Please try again later.',
-      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+      message: "Failed to send email. Please try again later.",
+      error: process.env.NODE_ENV === "development" ? error.message : undefined,
     });
   }
 });
 
 // Health check endpoint
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'Server is running', timestamp: new Date().toISOString() });
+app.get("/api/health", (req, res) => {
+  res.json({
+    status: "Server is running",
+    timestamp: new Date().toISOString(),
+  });
 });
 
 // Start server
 app.listen(PORT, () => {
   console.log(`🚀 Backend server running on port ${PORT}`);
-  console.log(`📧 Email service configured with: ${process.env.EMAIL_USER || 'Not configured'}`);
+  console.log(
+    `📧 Email service configured with: ${process.env.EMAIL_USER || "Not configured"}`,
+  );
 });

@@ -1,7 +1,14 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from "react";
 
-function Typewriter({ text = 'Your Name', speed = 80, loop = false, onComplete, enabled = true, className = '' }) {
-  const [display, setDisplay] = useState('');
+function Typewriter({
+  text = "Your Name",
+  speed = 80,
+  loop = false,
+  onComplete,
+  enabled = true,
+  className = "",
+}) {
+  const [display, setDisplay] = useState("");
   const indexRef = useRef(0);
   const directionRef = useRef(1); // 1 = typing, -1 = deleting
   const intervalRef = useRef(null);
@@ -17,7 +24,7 @@ function Typewriter({ text = 'Your Name', speed = 80, loop = false, onComplete, 
     }
 
     // Reset state when text or speed/loop changes and enabled
-    setDisplay('');
+    setDisplay("");
     indexRef.current = 0;
     directionRef.current = 1;
 

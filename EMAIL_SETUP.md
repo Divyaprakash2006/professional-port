@@ -3,6 +3,7 @@
 ## 🚀 Complete Setup Guide
 
 ### ✅ Current Configuration
+
 - **Email**: `diviyaprakash32@gmail.com`
 - **Frontend**: `http://localhost:3000`
 - **Backend**: `http://localhost:8000`
@@ -11,39 +12,46 @@
 ### 🔐 Gmail App Password Setup
 
 #### Step 1: Enable 2-Factor Authentication
+
 1. Go to [Google Account Settings](https://myaccount.google.com/)
 2. Click **Security** → **2-Step Verification**
 3. Follow setup if not enabled
 
 #### Step 2: Generate App Password
+
 1. In **Security** → **2-Step Verification**
 2. Scroll down → **App passwords**
 3. Select **Mail** → **Generate**
 4. **Copy the 16-character password**
 
 #### Step 3: Update .env File
+
 Replace `your-gmail-app-password-here` in `.env` with your actual app password:
 
 ```env
 EMAIL_PASS=abcdefghijklmnop
 ```
-*(Remove spaces, use actual password)*
+
+_(Remove spaces, use actual password)_
 
 ### 3. Alternative Email Providers
 
 #### Outlook/Hotmail
+
 ```env
 # In server.js, change the service to:
 service: 'outlook'
 ```
 
 #### Yahoo
+
 ```env
 # In server.js, change the service to:
 service: 'yahoo'
 ```
 
 #### Custom SMTP
+
 ```javascript
 // In server.js, replace the service configuration with:
 host: 'your-smtp-server.com',
