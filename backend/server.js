@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5000;
 app.use(
   cors({
     origin:
-      process.env.NODE_ENV === "development"
+      process.env.NODE_ENV === "production"
         ? true // Allow all origins in production (Render will set specific domain)
         : [
             "http://localhost:3000",
@@ -129,6 +129,8 @@ app.post("/api/contact", async (req, res) => {
           <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; text-align: center;">
             <h1 style="color: white; margin: 0; font-size: 24px;">📧 New Contact Message</h1>
             <p style="color: #e8f4f8; margin: 10px 0 0 0;">From your portfolio website</p>
+            <p style="color: #e8f4f8; margin: 10px 0 0 0;">This email was sent from your portfolio website contact form.</p>
+            <p style="color: #e8f4f8; margin: 10px 0 0 0;">Please reply to this email to respond to the sender.</p>
           </div>
           
           <div style="padding: 30px; background: white;">
