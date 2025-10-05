@@ -10,8 +10,8 @@ services:
       - key: NODE_ENV
         value: production
       - key: EMAIL_USER
-        value: diviyaprakash32@gmail.com
+        fromSecret: email_user
       - key: EMAIL_APP_PASS
-        value: jlfnjwznuxqqrsqy
+        fromSecret: email_app_pass
       - key: RECIPIENT_EMAIL
-        value: diviyaprakash32@gmail.com
+        fromSecret: recipient_email
