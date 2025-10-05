@@ -1,17 +1,15 @@
 module.exports = {
-  webpack: {
-    configure: (webpackConfig) => {
-      // Override the devServer configuration to use setupMiddlewares
-      if (webpackConfig.devServer) {
-        webpackConfig.devServer.setupMiddlewares = (middlewares, devServer) => {
-          // Any custom middlewares can be added here if needed
-          return middlewares;
-        };
-        // Remove deprecated options if they exist
-        delete webpackConfig.devServer.onAfterSetupMiddleware;
-        delete webpackConfig.devServer.onBeforeSetupMiddleware;
-      }
-      return webpackConfig;
-    },
+  devServer: (devServerConfig) => {
+    // Remove deprecated middleware options
+    delete devServerConfig.onAfterSetupMiddleware;
+    delete devServerConfig.onBeforeSetupMiddleware;
+
+    // Ensure setupMiddlewares is properly configured
+    devServerConfig.setupMiddlewares = (middlewares, devServer) => {
+      // Return middlewares as-is since we don't need custom middleware
+      return middlewares;
+    };
+
+    return devServerConfig;
   },
 };
