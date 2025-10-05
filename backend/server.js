@@ -28,17 +28,44 @@ app.use(express.json());
 
 // Serve static files in production
 if (process.env.NODE_ENV === "production") {
-  // On Render, build files are in the project root
-  const buildPath = path.join(__dirname, "../build");
-  console.log("Build path:", buildPath);
+  // Determine build path - check multiple possible locations for Render deployment
+  let buildPath;
+
+  // Try different possible build locations for Render
+  const possiblePaths = [
+    path.join(__dirname, "../build"),          // Standard location (backend/../build)
+    path.join(__dirname, "../../build"),       // If backend is in a subfolder
+    path.join(process.cwd(), "build"),         // Project root build
+    path.join(process.cwd(), "src/build"),     // src/build (as mentioned in error)
+  ];
+
+  for (const testPath of possiblePaths) {
+    if (require("fs").existsSync(path.join(testPath, "index.html"))) {
+      buildPath = testPath;
+      break;
+    }
+  }
+
+  if (!buildPath) {
+    console.error("❌ Build path not found! Checked paths:", possiblePaths);
+    console.error("Make sure to run 'npm run build' before deploying");
+    process.exit(1);
+  }
+
+  console.log("✅ Found build path:", buildPath);
   app.use(express.static(buildPath));
 
   // Handle React Router - send all non-API requests to index.html
   app.get("*", (req, res) => {
     if (!req.path.startsWith("/api/")) {
       const indexPath = path.join(buildPath, "index.html");
-      console.log("Index path:", indexPath);
-      res.sendFile(indexPath);
+      console.log("Serving index.html from:", indexPath);
+      res.sendFile(indexPath, (err) => {
+        if (err) {
+          console.error("Error serving index.html:", err);
+          res.status(500).send("Error loading application");
+        }
+      });
     }
   });
 }
