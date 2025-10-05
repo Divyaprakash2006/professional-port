@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: professional-portfolio
+    env: node
+    buildCommand: npm install && npm run build && mv build backend/
+    startCommand: npm run server
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
