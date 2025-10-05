@@ -18,9 +18,10 @@ app.use(
             "http://localhost:5000",
             "http://localhost:3001",
             "http://127.0.0.1:49675",
+            "http://127.0.0.1:5000", // Added for React dev server
           ],
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type"],
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   }),
 );

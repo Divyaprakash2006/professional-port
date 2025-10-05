@@ -24,7 +24,7 @@
     "rimraf": "^6.0.1"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "DANGEROUSLY_DISABLE_HOST_CHECK=true craco start",
     "server": "node backend/server.js",
     "build": "craco build",
     "test": "craco test",
