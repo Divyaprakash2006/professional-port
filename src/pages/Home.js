@@ -109,7 +109,7 @@ function Home() {
           }}
         >
           <Typewriter
-            text={`I'm ${resume.name}`}
+            text="I'm Divyaprakash Venkatachalam"
             speed={80}
             loop={false}
             onComplete={() => setShowSummary(true)}
@@ -119,7 +119,7 @@ function Home() {
 
         {showSummary && (
           <p
-            className="lead"
+            className="lead mobile-summary"
             style={{
               maxWidth: 780,
               textAlign: "center",

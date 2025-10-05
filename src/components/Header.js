@@ -4,6 +4,20 @@ import resume from "../data/resume";
 
 function Header() {
   const [open, setOpen] = useState(false);
+  const [closing, setClosing] = useState(false);
+
+  const toggleMenu = () => {
+    if (open) {
+      setClosing(true);
+      setTimeout(() => {
+        setOpen(false);
+        setClosing(false);
+      }, 300); // Match animation duration
+    } else {
+      setOpen(true);
+    }
+  };
+
   return (
     <header className="site-header">
       <div className="container nav">
@@ -19,49 +33,100 @@ function Header() {
           </div>
           <span className="brand-name">{resume.name}</span>
         </div>
+
         <button
-          className="nav-toggle"
-          onClick={() => setOpen(!open)}
+          className={`nav-toggle ${open ? 'active' : ''}`}
+          onClick={toggleMenu}
           aria-label="Toggle navigation"
         >
-          Menu
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
         </button>
+
         <nav
-          className={`nav-links ${open ? "open" : ""}`}
-          onClick={() => setOpen(false)}
+          className={`nav-links ${open ? "open" : ""} ${closing ? "closing" : ""}`}
+          onClick={toggleMenu}
         >
+          {/* Dynamic Technology Objects in Sidebar */}
+          <div className="sidebar-tech-objects">
+            <div className="sidebar-tech-object sidebar-tech-object-1">
+              <div className="sidebar-tech-glow"></div>
+              <span className="sidebar-tech-symbol"></span>
+            </div>
+            <div className="sidebar-tech-object sidebar-tech-object-2">
+              <div className="sidebar-tech-glow"></div>
+              <span className="sidebar-tech-symbol"></span>
+            </div>
+          </div>
+
           <NavLink
             end
             to="/"
             className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
           >
-            Home
+            <span className="nav-icon">🏠</span>
+            <span>Home</span>
           </NavLink>
           <NavLink
             to="/education"
             className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
           >
-            Education & Skills
+            <span className="nav-icon">📚</span>
+            <span>Education & Skills</span>
           </NavLink>
           <NavLink
             to="/certifications"
             className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
           >
-            Certifications
+            <span className="nav-icon">🏆</span>
+            <span>Certifications</span>
           </NavLink>
           <NavLink
             to="/projects"
             className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
           >
-            Projects
+            <span className="nav-icon">💼</span>
+            <span>Projects</span>
           </NavLink>
           <NavLink
             to="/contact"
             className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
           >
-            Contact
+            <span className="nav-icon">💬</span>
+            <span>Contact</span>
           </NavLink>
         </nav>
+
+        {/* Mobile overlay for sidebar */}
+        <div
+          className={`nav-overlay ${open ? 'active' : ''}`}
+          onClick={toggleMenu}
+        ></div>
+      </div>
+
+      {/* Dynamic Tech Objects */}
+      <div className="nav-tech-objects">
+        <div className="tech-object tech-object-1">
+          <div className="tech-glow"></div>
+          <span className="tech-symbol">⚛️</span>
+        </div>
+        <div className="tech-object tech-object-2">
+          <div className="tech-glow"></div>
+          <span className="tech-symbol">⚛️</span>
+        </div>
+        <div className="tech-object tech-object-3">
+          <div className="tech-glow"></div>
+          <span className="tech-symbol">⚛️</span>
+        </div>
+        <div className="tech-object tech-object-4">
+          <div className="tech-glow"></div>
+          <span className="tech-symbol">⚛️</span>
+        </div>
+        <div className="tech-object tech-object-5">
+          <div className="tech-glow"></div>
+          <span className="tech-symbol">⚛️</span>
+        </div>
       </div>
     </header>
   );

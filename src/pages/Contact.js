@@ -11,11 +11,41 @@ import {
 function Contact() {
   const socialLinks = [
     {
+      name: "GitHub",
+      icon: FaGithub,
+      url: "https://github.com/Divyaprakash2006",
+      color: "#333",
+      hoverColor: "#6e5494",
+      featured: true, // Mark GitHub as featured
+    },
+    {
+      name: "LinkedIn",
+      icon: FaLinkedin,
+      url: "https://www.linkedin.com/in/divyaprakash-v-2036222a5/",
+      color: "#0077B5",
+      hoverColor: "#005885",
+    },
+    {
       name: "WhatsApp",
       icon: FaWhatsapp,
-      url: "https://wa.me/918072597309", // WhatsApp number: +91 8072597309
+      url: "https://wa.me/918072597309",
       color: "#25D366",
       hoverColor: "#128C7E",
+    },
+    {
+      name: "Email",
+      displayName: "diviyaprakash32@gmail.com",
+      icon: FaEnvelope,
+      url: "mailto:diviyaprakash32@gmail.com",
+      color: "#D44638",
+      hoverColor: "#B23121",
+    },
+    {
+      name: "Instagram",
+      icon: FaInstagram,
+      url: "https://www.instagram.com/divyaprakash_vdp/?hl=en",
+      color: "#E4405F",
+      hoverColor: "#C13584",
     },
     {
       name: "Facebook",
@@ -23,35 +53,6 @@ function Contact() {
       url: "https://www.facebook.com/profile.php?id=61577304756249",
       color: "#1877F2",
       hoverColor: "#166FE5",
-    },
-    {
-      name: "Instagram",
-      icon: FaInstagram,
-      url: "https://www.instagram.com/divyaprakash_vdp/?hl=en", // Replace with your Instagram username
-      color: "#E4405F",
-      hoverColor: "#C13584",
-    },
-    {
-      name: "GitHub",
-      icon: FaGithub,
-      url: "https://github.com/Divyaprakash2006", // Replace with your GitHub username
-      color: "#333",
-      hoverColor: "#6e5494",
-    },
-    {
-      name: "LinkedIn",
-      icon: FaLinkedin,
-      url: "https://www.linkedin.com/in/divyaprakash-v-2036222a5/", // Replace with your LinkedIn profile
-      color: "#0077B5",
-      hoverColor: "#005885",
-    },
-    {
-      name: "Email",
-      displayName: "diviyaprakash32@gmail.com",
-      icon: FaEnvelope,
-      url: "mailto:diviyaprakash32@gmail.com", // Your email address
-      color: "#D44638",
-      hoverColor: "#B23121",
     },
   ];
 
@@ -124,15 +125,18 @@ function Contact() {
                   textDecoration: "none",
                   color: social.color,
                   transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-                  padding: "1.25rem 1rem",
+                  padding: social.featured ? "1.5rem 1.25rem" : "1.25rem 1rem",
                   borderRadius: "16px",
                   backgroundColor: "transparent",
-                  border: `2px solid ${social.color}30`,
+                  border: `2px solid ${social.color}${social.featured ? '50' : '30'}`,
                   position: "relative",
                   overflow: "hidden",
-                  boxShadow: `0 0 20px ${social.color}15, inset 0 0 20px ${social.color}05`,
+                  boxShadow: social.featured
+                    ? `0 0 30px ${social.color}25, inset 0 0 30px ${social.color}10, 0 0 0 2px ${social.color}20`
+                    : `0 0 20px ${social.color}15, inset 0 0 20px ${social.color}05`,
                   backdropFilter: "blur(10px)",
-                  background: `linear-gradient(135deg, ${social.color}08 0%, transparent 50%, ${social.hoverColor}05 100%)`,
+                  background: `linear-gradient(135deg, ${social.color}${social.featured ? '15' : '08'} 0%, transparent 50%, ${social.hoverColor}05 100%)`,
+                  transform: social.featured ? 'scale(1.05)' : 'scale(1)',
                 }}
                 onMouseEnter={(e) => {
                   e.target.style.background = `linear-gradient(135deg, ${social.hoverColor}20 0%, ${social.color}15 50%, ${social.hoverColor}10 100%)`;
@@ -142,10 +146,12 @@ function Contact() {
                   e.target.style.backdropFilter = "blur(15px)";
                 }}
                 onMouseLeave={(e) => {
-                  e.target.style.background = `linear-gradient(135deg, ${social.color}08 0%, transparent 50%, ${social.hoverColor}05 100%)`;
-                  e.target.style.transform = "translateY(0) scale(1)";
-                  e.target.style.borderColor = `${social.color}30`;
-                  e.target.style.boxShadow = `0 0 20px ${social.color}15, inset 0 0 20px ${social.color}05`;
+                  e.target.style.background = `linear-gradient(135deg, ${social.color}${social.featured ? '15' : '08'} 0%, transparent 50%, ${social.hoverColor}05 100%)`;
+                  e.target.style.transform = social.featured ? "scale(1.05)" : "scale(1)";
+                  e.target.style.borderColor = `${social.color}${social.featured ? '50' : '30'}`;
+                  e.target.style.boxShadow = social.featured
+                    ? `0 0 30px ${social.color}25, inset 0 0 30px ${social.color}10, 0 0 0 2px ${social.color}20`
+                    : `0 0 20px ${social.color}15, inset 0 0 20px ${social.color}05`;
                   e.target.style.backdropFilter = "blur(10px)";
                 }}
               >
@@ -164,12 +170,35 @@ function Contact() {
                     e.target.style.transform = "scale(1)";
                   }}
                 >
-                  <social.icon size={32} />
+                  <social.icon size={social.featured ? 36 : 32} />
                 </div>
+                {social.featured && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "-8px",
+                      right: "-8px",
+                      background: "linear-gradient(45deg, #ff6b6b, #4ecdc4)",
+                      color: "white",
+                      borderRadius: "50%",
+                      width: "24px",
+                      height: "24px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: "10px",
+                      fontWeight: "bold",
+                      boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
+                      animation: "featuredPulse 2s ease-in-out infinite",
+                    }}
+                  >
+                    ⭐
+                  </div>
+                )}
                 <span
                   style={{
-                    fontSize: "0.875rem",
-                    fontWeight: "600",
+                    fontSize: social.featured ? "0.95rem" : "0.875rem",
+                    fontWeight: social.featured ? "700" : "600",
                     color: social.color,
                     textAlign: "center",
                     marginBottom: social.displayName ? "0.25rem" : "0",

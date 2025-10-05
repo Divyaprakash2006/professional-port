@@ -1,7 +1,7 @@
 // Centralized resume/profile data for the portfolio
 
 const resume = {
-  name: "Divyaprakash Venkatachalam",
+  name: "DIVYAPRAKASH V",
   contact: {
     email: "divyaprakash32@gmail.com",
     phone: "+91-8072597309",

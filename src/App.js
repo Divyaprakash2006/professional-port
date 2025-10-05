@@ -7,6 +7,7 @@ import About from "./pages/About";
 import Projects from "./pages/Projects";
 import NotFound from "./pages/NotFound";
 import EducationSkills from "./pages/EducationSkills";
+import Certifications from "./pages/Certifications";
 import Contact from "./pages/Contact";
 
 function App() {
