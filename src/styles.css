@@ -446,12 +446,27 @@ a {
   height: 3px;
 }
 
+/* Desktop download button styling */
+.desktop-download {
+  display: none;
+}
+
+@media (min-width: 761px) {
+  .desktop-download {
+    display: block !important;
+  }
+}
+
 @media (max-width: 760px) {
   body {
     padding-top: 70px; /* Adjust for mobile header height */
   }
   .container {
     padding: 1rem;
+  }
+  
+  .desktop-download {
+    display: none !important;
   }
 
   /* Show hamburger menu on mobile */

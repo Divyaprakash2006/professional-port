@@ -6,7 +6,9 @@ import {
   FaLinkedin,
   FaEnvelope,
   FaFacebook,
+  FaFileDownload,
 } from "react-icons/fa";
+import DownloadResumeButton from "../components/DownloadResumeButton";
 
 function Contact() {
   const socialLinks = [
@@ -59,6 +61,81 @@ function Contact() {
   return (
     <section className="container" style={{ padding: "2rem 1rem" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+        {/* iOS-style Resume Download Card */}
+        <div
+          style={{
+            maxWidth: "400px",
+            margin: "0 auto 2rem auto",
+            background: "rgba(255, 255, 255, 0.05)",
+            backdropFilter: "blur(10px)",
+            WebkitBackdropFilter: "blur(10px)",
+            borderRadius: "20px",
+            padding: "1.5rem",
+            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
+            border: "1px solid rgba(255, 255, 255, 0.1)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "1rem",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            style={{
+              width: "60px",
+              height: "60px",
+              borderRadius: "16px",
+              background: "linear-gradient(135deg, var(--primary), var(--accent))",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: "0.5rem",
+              boxShadow: "0 8px 20px rgba(108, 140, 255, 0.3)",
+            }}
+          >
+            <FaFileDownload size={30} color="#fff" />
+          </div>
+          
+          <h3 style={{ 
+            fontSize: "1.4rem", 
+            margin: "0",
+            background: "linear-gradient(135deg, var(--primary), var(--accent))",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            fontWeight: "600"
+          }}>
+            Download Resume
+          </h3>
+          
+          <p style={{
+            color: "var(--muted)",
+            textAlign: "center",
+            margin: "0",
+            fontSize: "0.9rem",
+            lineHeight: "1.5"
+          }}>
+            Get my complete resume with all projects, skills, and certifications
+          </p>
+          
+          <DownloadResumeButton 
+            variant="primary" 
+            size="large"
+            showText={true}
+            style={{
+              width: "100%",
+              maxWidth: "280px",
+              borderRadius: "16px",
+              padding: "1rem",
+              fontSize: "1rem",
+              background: "linear-gradient(135deg, var(--primary), var(--accent))",
+              border: "none",
+              boxShadow: "0 8px 20px rgba(108, 140, 255, 0.2)",
+              transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+            }}
+          />
+        </div>
+
         <h2
           style={{
             textAlign: "center",

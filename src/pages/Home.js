@@ -118,19 +118,22 @@ function Home() {
         </h1>
 
         {showSummary && (
-          <p
-            className="lead mobile-summary"
-            style={{
-              maxWidth: 780,
-              textAlign: "center",
-              opacity: 0,
-              animation: "fadeIn 600ms forwards",
-              marginTop: "10px",
-              lineHeight: "1.6",
-            }}
-          >
-            {resume.summary}
-          </p>
+          <>
+            <p
+              className="lead mobile-summary"
+              style={{
+                maxWidth: 780,
+                textAlign: "center",
+                opacity: 0,
+                animation: "fadeIn 600ms forwards",
+                marginTop: "10px",
+                lineHeight: "1.6",
+                marginBottom: "1.5rem",
+              }}
+            >
+              {resume.summary}
+            </p>
+          </>
         )}
       </div>
 
