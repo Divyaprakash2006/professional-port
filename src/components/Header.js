@@ -105,18 +105,12 @@ function Header() {
         ></div>
       </div>
 
-      {/* Dynamic Tech Objects - More Technologies */}
+      {/* Dynamic Tech Objects - Core Web Technologies */}
       <div className="nav-tech-objects">
         <div className="tech-object tech-object-1"><div className="tech-glow"></div><span className="tech-symbol">⚛️</span></div>
-        <div className="tech-object tech-object-2"><div className="tech-glow"></div><span className="tech-symbol">🟨</span></div>
+        <div className="tech-object tech-object-2"><div className="tech-glow"></div><span className="tech-symbol">💻</span></div>
         <div className="tech-object tech-object-3"><div className="tech-glow"></div><span className="tech-symbol">🌐</span></div>
-        <div className="tech-object tech-object-4"><div className="tech-glow"></div><span className="tech-symbol">🐍</span></div>
-        <div className="tech-object tech-object-5"><div className="tech-glow"></div><span className="tech-symbol">🟦</span></div>
-        <div className="tech-object tech-object-6"><div className="tech-glow"></div><span className="tech-symbol">💾</span></div>
-        <div className="tech-object tech-object-7"><div className="tech-glow"></div><span className="tech-symbol">🌳</span></div>
-        <div className="tech-object tech-object-8"><div className="tech-glow"></div><span className="tech-symbol">🎨</span></div>
-        <div className="tech-object tech-object-9"><div className="tech-glow"></div><span className="tech-symbol">🔗</span></div>
-        <div className="tech-object tech-object-10"><div className="tech-glow"></div><span className="tech-symbol">🐙</span></div>
+        <div className="tech-object tech-object-4"><div className="tech-glow"></div><span className="tech-symbol">🎨</span></div>
       </div>
     </header>
   );

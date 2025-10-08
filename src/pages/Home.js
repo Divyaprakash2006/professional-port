@@ -26,28 +26,35 @@ function Home() {
     >
       <div
         className="container home-content home-shift-up"
-        style={{ position: "relative", zIndex: 2 }}
+        style={{ position: "relative", zIndex: 2, width: "100%", maxWidth: "100%" }}
       >
         {/* Professional Photo */}
         <div
           style={{
             display: "flex",
             justifyContent: "center",
-            marginBottom: "20px",
-            marginTop: "-100px",
+            alignItems: "center",
+            marginBottom: "clamp(15px, 4vw, 25px)",
+            marginTop: "0",
             opacity: 0,
             animation: "fadeIn 800ms forwards",
+            width: "100%",
+            maxWidth: "100%",
+            padding: "0 1rem",
+            boxSizing: "border-box",
           }}
         >
           <div
             style={{
-              width: "200px",
-              height: "200px",
+              width: "clamp(150px, 40vw, 220px)",
+              height: "clamp(150px, 40vw, 220px)",
+              maxWidth: "220px",
+              maxHeight: "220px",
               borderRadius: "50%",
               overflow: "hidden",
-              border: "5px solid rgba(108, 140, 255, 0.4)",
+              border: "clamp(3px, 0.5vw, 5px) solid rgba(108, 140, 255, 0.4)",
               boxShadow:
-                "0 0 40px rgba(108, 140, 255, 0.5), 0 0 80px rgba(34, 211, 238, 0.3)",
+                "0 0 clamp(20px, 4vw, 40px) rgba(108, 140, 255, 0.5), 0 0 clamp(40px, 8vw, 80px) rgba(34, 211, 238, 0.3)",
               background:
                 "linear-gradient(135deg, rgba(108, 140, 255, 0.1), rgba(34, 211, 238, 0.1))",
               display: "flex",
@@ -55,15 +62,16 @@ function Home() {
               justifyContent: "center",
               position: "relative",
               transition: "all 0.3s ease",
+              flexShrink: 0,
             }}
             onMouseEnter={(e) => {
-              e.target.style.transform = "scale(1.05)";
-              e.target.style.boxShadow =
+              e.currentTarget.style.transform = "scale(1.05)";
+              e.currentTarget.style.boxShadow =
                 "0 0 40px rgba(108, 140, 255, 0.6), 0 0 80px rgba(34, 211, 238, 0.3)";
             }}
             onMouseLeave={(e) => {
-              e.target.style.transform = "scale(1)";
-              e.target.style.boxShadow =
+              e.currentTarget.style.transform = "scale(1)";
+              e.currentTarget.style.boxShadow =
                 "0 0 30px rgba(108, 140, 255, 0.4), 0 0 60px rgba(34, 211, 238, 0.2)";
             }}
           >
@@ -104,8 +112,13 @@ function Home() {
           className="hero-title"
           style={{
             textAlign: "center",
-            marginBottom: "15px",
-            marginTop: "10px",
+            marginBottom: "clamp(8px, 2vw, 15px)",
+            marginTop: "clamp(5px, 2vw, 10px)",
+            fontSize: "clamp(1.5rem, 5vw, 2.5rem)",
+            lineHeight: "1.2",
+            width: "100%",
+            padding: "0 1rem",
+            boxSizing: "border-box",
           }}
         >
           <Typewriter
@@ -122,13 +135,17 @@ function Home() {
             <p
               className="lead mobile-summary"
               style={{
-                maxWidth: 780,
+                maxWidth: "min(780px, 90vw)",
                 textAlign: "center",
                 opacity: 0,
                 animation: "fadeIn 600ms forwards",
-                marginTop: "10px",
+                marginTop: "clamp(5px, 2vw, 10px)",
                 lineHeight: "1.6",
-                marginBottom: "1.5rem",
+                marginBottom: "1rem",
+                fontSize: "clamp(0.9rem, 2.5vw, 1.1rem)",
+                padding: "0 1rem",
+                boxSizing: "border-box",
+                width: "100%",
               }}
             >
               {resume.summary}

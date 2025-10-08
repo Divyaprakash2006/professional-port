@@ -97,7 +97,7 @@ const resume = {
     frameworks: ["React.js", "Express.js", "Node.js"],
     databases: ["MySQL", "MongoDB"],
     cloud: ["AWS (Basic)"],
-    tools: ["GitHub", "VS Code", "MySQL Workbench"],
+    tools: ["GitHub", "VS Code", "MS Workbench"],
     analytics: ["Power BI", "Excel", "Pandas", "NumPy", "Matplotlib"],
   },
 };
