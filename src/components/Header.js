@@ -65,36 +65,31 @@ function Header() {
             to="/"
             className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
           >
-            <span className="nav-icon">🏠</span>
-            <span>Home</span>
+            <span className="nav-icon">Home</span>
           </NavLink>
           <NavLink
             to="/education"
             className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
           >
-            <span className="nav-icon">📚</span>
-            <span>Education & Skills</span>
+            <span className="nav-icon">Education</span>
           </NavLink>
           <NavLink
             to="/certifications"
             className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
           >
-            <span className="nav-icon">🏆</span>
-            <span>Certifications</span>
+            <span className="nav-icon">Certificates</span>
           </NavLink>
           <NavLink
             to="/projects"
             className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
           >
-            <span className="nav-icon">💼</span>
-            <span>Projects</span>
+            <span className="nav-icon">Projects</span>
           </NavLink>
           <NavLink
             to="/contact"
             className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
           >
-            <span className="nav-icon">💬</span>
-            <span>Contact</span>
+            <span className="nav-icon">Contact</span>
           </NavLink>
         </nav>
 
@@ -107,10 +102,10 @@ function Header() {
 
       {/* Dynamic Tech Objects - Core Web Technologies */}
       <div className="nav-tech-objects">
-        <div className="tech-object tech-object-1"><div className="tech-glow"></div><span className="tech-symbol">⚛️</span></div>
-        <div className="tech-object tech-object-2"><div className="tech-glow"></div><span className="tech-symbol">💻</span></div>
-        <div className="tech-object tech-object-3"><div className="tech-glow"></div><span className="tech-symbol">🌐</span></div>
-        <div className="tech-object tech-object-4"><div className="tech-glow"></div><span className="tech-symbol">🎨</span></div>
+        <div className="tech-object tech-object-1"><div className="tech-glow"></div><span className="tech-symbol">React</span></div>
+        <div className="tech-object tech-object-2"><div className="tech-glow"></div><span className="tech-symbol">JS</span></div>
+        <div className="tech-object tech-object-3"><div className="tech-glow"></div><span className="tech-symbol">Node</span></div>
+        <div className="tech-object tech-object-4"><div className="tech-glow"></div><span className="tech-symbol">CSS</span></div>
       </div>
     </header>
   );

@@ -38,6 +38,13 @@ const resume = {
   ],
   projects: [
     {
+      title: "LeeTracker",
+      description:
+        "Full-stack LeetCode progress tracking application with user authentication, problem analytics, and performance visualization. Features include problem tracking, difficulty-based filtering, and personalized dashboards.",
+      link: "",
+      tags: ["React", "Node.js", "MongoDB", "REST API"],
+    },
+    {
       title: "Responsive Calculator",
       description:
         "Modern, fully responsive calculator with scientific functions, dark/light theme toggle, and keyboard support. Built with vanilla JavaScript for optimal performance.",

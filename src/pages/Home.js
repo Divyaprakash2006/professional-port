@@ -52,11 +52,11 @@ function Home() {
               maxHeight: "220px",
               borderRadius: "50%",
               overflow: "hidden",
-              border: "clamp(3px, 0.5vw, 5px) solid rgba(108, 140, 255, 0.4)",
+              border: "clamp(3px, 0.5vw, 5px) solid rgba(91, 124, 255, 0.3)",
               boxShadow:
-                "0 0 clamp(20px, 4vw, 40px) rgba(108, 140, 255, 0.5), 0 0 clamp(40px, 8vw, 80px) rgba(34, 211, 238, 0.3)",
+                "8px 8px 16px rgba(163, 177, 198, 0.5), -8px -8px 16px rgba(255, 255, 255, 0.5)",
               background:
-                "linear-gradient(135deg, rgba(108, 140, 255, 0.1), rgba(34, 211, 238, 0.1))",
+                "linear-gradient(135deg, rgba(91, 124, 255, 0.05), rgba(0, 212, 255, 0.05))",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -67,12 +67,12 @@ function Home() {
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = "scale(1.05)";
               e.currentTarget.style.boxShadow =
-                "0 0 40px rgba(108, 140, 255, 0.6), 0 0 80px rgba(34, 211, 238, 0.3)";
+                "10px 10px 20px rgba(163, 177, 198, 0.6), -10px -10px 20px rgba(255, 255, 255, 0.6)";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = "scale(1)";
               e.currentTarget.style.boxShadow =
-                "0 0 30px rgba(108, 140, 255, 0.4), 0 0 60px rgba(34, 211, 238, 0.2)";
+                "8px 8px 16px rgba(163, 177, 198, 0.5), -8px -8px 16px rgba(255, 255, 255, 0.5)";
             }}
           >
             <img
@@ -96,11 +96,12 @@ function Home() {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    font-size: 48px;
-                    color: rgba(108, 140, 255, 0.8);
-                    background: linear-gradient(135deg, rgba(108, 140, 255, 0.2), rgba(34, 211, 238, 0.2));
+                    font-size: 3rem;
+                    font-weight: 700;
+                    color: rgba(91, 124, 255, 0.8);
+                    background: linear-gradient(135deg, rgba(91, 124, 255, 0.1), rgba(0, 212, 255, 0.1));
                   ">
-                    👤
+                    DP
                   </div>
                 `;
               }}

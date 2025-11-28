@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { FaDownload, FaSpinner, FaCheck } from 'react-icons/fa';
-import { generateResumePDF } from '../utils/resumeGenerator';
 
 function DownloadResumeButton({ 
   variant = 'primary', // 'primary' | 'secondary' | 'minimal'
@@ -19,8 +18,13 @@ function DownloadResumeButton({
       // Add a small delay for better UX
       await new Promise(resolve => setTimeout(resolve, 500));
       
-      // Generate and download the PDF
-      generateResumePDF();
+      // Download the pre-existing PDF from public folder
+      const link = document.createElement('a');
+      link.href = '/Interview_resume.pdf';
+      link.download = 'Interview_resume.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
       
       setDownloadComplete(true);
       
