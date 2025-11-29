@@ -3,12 +3,14 @@ import resume from "../data/resume";
 
 function About() {
   return (
-    <section>
-      <h2>About Me</h2>
-      <p style={{ marginBottom: "1.5rem", lineHeight: "1.6" }}>
-        {resume.summary}
-      </p>
-    </section>
+    <div className="container">
+      <section className="about-section">
+        <h2>About Me</h2>
+        <div className="card">
+          <p>{resume.summary}</p>
+        </div>
+      </section>
+    </div>
   );
 }
 

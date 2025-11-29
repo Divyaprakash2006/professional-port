@@ -19,116 +19,101 @@ function Certifications() {
   };
 
   return (
-    <section>
-      <h2 style={{ marginBottom: "1rem" }}>Certifications & Achievements</h2>
+    <div className="container">
+      <section>
+        <h2 style={{ marginBottom: "2rem", textAlign: "center" }}>Certifications & Achievements</h2>
 
-      {/* AWS Certification Section - image only, with title */}
-      <div
-        className="card"
-        style={{
-          marginBottom: "1.5rem",
-          padding: "1.5rem",
-          width: "100%",
-          maxWidth: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <h3 style={{ margin: "0 0 1rem 0", textAlign: "center" }}>
-          AWS Certified Cloud Practitioner
-        </h3>
-        <img
-          src={awsCertImg}
-          alt="AWS Certified Cloud Practitioner certificate"
-          style={{
-            width: "100%",
-            maxWidth: 400,
-            borderRadius: "8px",
-            border: "1px solid var(--border)",
-          }}
-        />
-      </div>
-
-      {/* Other Certifications */}
-      <div style={{ display: "grid", gap: "1.25rem" }}>
-        {resume.certifications
-          .filter((c) => c.name !== "AWS Certified Cloud Practitioner")
-          .map((c, i) => (
-            <div
-              key={i}
-              className="card"
+      {/* Certifications Grid */}
+      <div className="certifications-grid" style={{ display: "grid", gap: "1.5rem", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 350px), 1fr))" }}>
+        {resume.certifications.map((c, i) => (
+          <div
+            key={i}
+            className="card certification-card"
+            style={{
+              padding: "1.5rem",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "1rem",
+              height: "100%",
+            }}
+          >
+            <h3 style={{ 
+              margin: 0, 
+              textAlign: "center",
+              fontSize: "1.15rem",
+              fontWeight: "600",
+              color: "var(--text)"
+            }}>
+              {c.name}
+            </h3>
+            
+            <span
               style={{
-                width: "100%",
-                maxWidth: "100%",
-                padding: "1.5rem",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
+                color: "var(--muted)",
+                textAlign: "center",
+                fontSize: "0.9rem",
+                fontWeight: "500"
               }}
             >
-              <h3 style={{ margin: "0 0 1rem 0", textAlign: "center" }}>
-                {c.name}
-              </h3>
-              <span
+              {c.issuer}
+            </span>
+            
+            {c.note && (
+              <div
                 style={{
                   color: "var(--muted)",
-                  marginBottom: "0.5rem",
                   textAlign: "center",
+                  fontSize: "0.85rem",
+                  lineHeight: "1.5"
                 }}
               >
-                {c.issuer}
-              </span>
-              {c.note && (
-                <div
+                {c.note}
+              </div>
+            )}
+            
+            {/* Show certificate image if available */}
+            {certImages[c.name] ? (
+              <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "auto"
+                }}
+              >
+                <img
+                  src={certImages[c.name]}
+                  alt={c.name + " certificate"}
                   style={{
-                    color: "var(--muted)",
-                    marginBottom: "0.75rem",
-                    textAlign: "center",
-                  }}
-                >
-                  {c.note}
-                </div>
-              )}
-              {/* Show certificate image if available */}
-              {certImages[c.name] ? (
-                <div
-                  style={{
-                    marginTop: "0.75rem",
                     width: "100%",
-                    display: "flex",
-                    justifyContent: "center",
+                    maxWidth: "350px",
+                    height: "auto",
+                    borderRadius: "12px",
+                    border: "1px solid var(--border)",
+                    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+                    objectFit: "cover"
                   }}
-                >
-                  <img
-                    src={certImages[c.name]}
-                    alt={c.name + " certificate"}
-                    style={{
-                      width: "100%",
-                      maxWidth: 400,
-                      borderRadius: "8px",
-                      border: "1px solid var(--border)",
-                      display: "block",
-                      margin: "0 auto",
-                    }}
-                  />
-                </div>
-              ) : (
-                <div
-                  style={{
-                    marginTop: "0.75rem",
-                    color: "var(--muted)",
-                    fontSize: "0.95em",
-                    textAlign: "center",
-                  }}
-                >
-                  <em>Certificate image coming soon</em>
-                </div>
-              )}
-            </div>
-          ))}
+                />
+              </div>
+            ) : (
+              <div
+                style={{
+                  marginTop: "auto",
+                  color: "var(--muted)",
+                  fontSize: "0.85rem",
+                  textAlign: "center",
+                  fontStyle: "italic"
+                }}
+              >
+                Certificate image coming soon
+              </div>
+            )}
+          </div>
+        ))}
       </div>
     </section>
+    </div>
   );
 }
 

@@ -59,8 +59,9 @@ function Contact() {
   ];
 
   return (
-    <section className="container" style={{ padding: "2rem 1rem" }}>
-      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+    <div className="container">
+      <section style={{ padding: "2rem 0" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
         {/* iOS-style Resume Download Card */}
         <div
           style={{
@@ -329,7 +330,8 @@ function Contact() {
           </div>
         </div>
       </div>
-    </section>
+      </section>
+    </div>
   );
 }
 
