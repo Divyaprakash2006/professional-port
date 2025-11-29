@@ -48,18 +48,6 @@ function Header() {
           className={`nav-links ${open ? "open" : ""} ${closing ? "closing" : ""}`}
           onClick={toggleMenu}
         >
-          {/* Dynamic Technology Objects in Sidebar */}
-          <div className="sidebar-tech-objects">
-            <div className="sidebar-tech-object sidebar-tech-object-1">
-              <div className="sidebar-tech-glow"></div>
-              <span className="sidebar-tech-symbol"></span>
-            </div>
-            <div className="sidebar-tech-object sidebar-tech-object-2">
-              <div className="sidebar-tech-glow"></div>
-              <span className="sidebar-tech-symbol"></span>
-            </div>
-          </div>
-
           <NavLink
             end
             to="/"

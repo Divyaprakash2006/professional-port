@@ -39,9 +39,17 @@
   box-sizing: border-box;
 }
 
+*,
+*::before,
+*::after {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 55px;
+  -webkit-tap-highlight-color: transparent;
 }
 
 @media (min-width: 1024px) {
@@ -87,6 +95,9 @@ body {
   font-size: var(--font-size-base);
   line-height: var(--line-height-normal);
   color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeSpeed;
   background:
     radial-gradient(
       1200px 800px at 80% -10%,
@@ -311,8 +322,8 @@ select:focus-visible {
 
 @media (max-width: 760px) {
   .site-header {
-    min-height: 50px;
-    padding: 0.5rem 0;
+    min-height: 60px;
+    padding: 0.75rem 0;
   }
 }
 
@@ -333,8 +344,8 @@ select:focus-visible {
 
 @media (max-width: 760px) {
   .site-header .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
   }
 }
 
@@ -372,15 +383,17 @@ select:focus-visible {
 
 @media (max-width: 760px) {
   .brand {
-    gap: 0.4rem;
-    padding: 0.25rem 0.5rem;
+    gap: 0.5rem;
+    padding: 0.4rem 0.6rem;
+    flex-shrink: 0;
   }
 }
 
 @media (max-width: 480px) {
   .brand {
-    gap: 0.3rem;
-    padding: 0.2rem 0.4rem;
+    gap: 0.4rem;
+    padding: 0.3rem 0.5rem;
+    flex-shrink: 0;
   }
 }
 
@@ -416,22 +429,9 @@ select:focus-visible {
 }
 
 .brand-name {
-  background: linear-gradient(
-    to right,
-    #ff6b6b,
-    #4ecdc4,
-    #9b7bff,
-    #ff6b6b,
-    #4ecdc4
-  );
-  background-size: 300% 100%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #3b82f6;
   font-weight: 600;
   font-size: 0.95rem;
-  animation: navBrandRainbow 6s linear infinite;
-  text-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -466,29 +466,76 @@ select:focus-visible {
 }
 
 .nav-link {
-  padding: 0.5rem 0.9rem;
-  border-radius: 12px;
+  padding: 0.75rem 1.2rem;
+  border-radius: 10px;
   color: var(--text);
   position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  font-weight: 500;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 600;
   font-size: 0.85rem;
-  background: linear-gradient(135deg, rgba(91, 124, 255, 0.15), rgba(0, 212, 255, 0.1));
-  box-shadow: 0 0 15px rgba(91, 124, 255, 0.3),
-              4px 4px 8px rgba(163, 177, 198, 0.3),
-              -4px -4px 8px rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(91, 124, 255, 0.2);
+  text-transform: uppercase;
+  background: transparent;
+  border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.4rem;
   text-decoration: none;
   white-space: nowrap;
+  perspective: 30rem;
+  box-shadow: 4px 4px 8px rgba(163, 177, 198, 0.3),
+              -4px -4px 8px rgba(255, 255, 255, 0.8);
+  overflow: hidden;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.nav-link::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: -1;
+  transition: background 0.3s ease, transform 0.3s ease;
+  will-change: background, transform;
+  transform: translateZ(0);
+}
+
+.nav-link:hover {
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 7px 20px rgba(0, 140, 255, 0.4);
+}
+
+.nav-link:hover::before {
+  background: linear-gradient(
+    320deg,
+    rgba(0, 140, 255, 0.678),
+    rgba(128, 0, 128, 0.308)
+  );
+  animation: rotate 1s;
+  transition: all 0.5s;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateY(180deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
 }
 
 @media (min-width: 1200px) {
   .nav-link {
-    padding: 0.55rem 1rem;
+    padding: 0.85rem 1.4rem;
     font-size: 0.9rem;
   }
   
@@ -497,23 +544,20 @@ select:focus-visible {
   }
 }
 
-.nav-link:hover {
-  color: var(--primary);
-  background: linear-gradient(135deg, rgba(91, 124, 255, 0.25), rgba(0, 212, 255, 0.2));
-  box-shadow: 0 0 25px rgba(91, 124, 255, 0.5),
-              0 0 35px rgba(0, 212, 255, 0.3),
-              6px 6px 12px rgba(163, 177, 198, 0.4),
-              -6px -6px 12px rgba(255, 255, 255, 0.9);
-  transform: translateY(-2px);
-}
-
 .nav-link.active {
   color: #fff;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  box-shadow: 0 0 20px rgba(91, 124, 255, 0.6),
-              0 0 30px rgba(0, 212, 255, 0.4),
-              inset 2px 2px 4px rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 140, 255, 0.8),
+              0 0 30px rgba(0, 140, 255, 0.6),
+              0 0 40px rgba(128, 0, 128, 0.4),
+              0 7px 20px rgba(0, 140, 255, 0.6);
+}
+
+.nav-link.active::before {
+  background: linear-gradient(
+    320deg,
+    rgba(0, 140, 255, 0.9),
+    rgba(128, 0, 128, 0.7)
+  );
 }
 
 .nav-link:focus-visible {
@@ -552,14 +596,14 @@ select:focus-visible {
   overflow: hidden;
   transition: all 0.3s ease;
   box-shadow:
-    4px 4px 8px rgba(163, 177, 198, 0.3),
-    -4px -4px 8px rgba(255, 255, 255, 0.5);
+    4px 4px 8px rgba(163, 177, 198, 0.926),
+    -4px -4px 8px rgba(249, 246, 246, 0.5);
 }
 
 .nav-toggle:hover {
   border-color: var(--primary);
   box-shadow:
-    6px 6px 12px rgba(163, 177, 198, 0.4),
+    6px 6px 12px rgba(237, 238, 241, 0.4),
     -6px -6px 12px rgba(255, 255, 255, 0.6);
 }
 
@@ -719,7 +763,7 @@ select:focus-visible {
 
 @media (max-width: 760px) {
   body {
-    padding-top: 70px; /* Adjust for mobile header height */
+    padding-top: 60px; /* Adjust for mobile header height */
   }
   .container {
     padding: 1rem;
@@ -735,20 +779,25 @@ select:focus-visible {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 48px;
-    height: 48px;
-    min-width: 48px;
-    min-height: 48px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s ease;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     position: relative;
     z-index: 1001;
     padding: 0;
+    margin-left: auto;
+  }
+  
+  .nav-toggle:active {
+    transform: scale(0.95);
   }
 
   .nav-toggle:hover {
@@ -788,11 +837,11 @@ select:focus-visible {
   /* Mobile sidebar navigation - enhanced design */
   .nav-links {
     position: fixed;
-    top: 70px; /* Start below header */
+    top: 60px; /* Aligned with optimized header height */
     left: -100%;
     width: min(85vw, 320px);
-    height: calc(100vh - 70px);
-    height: calc(100dvh - 70px); /* Use dynamic viewport height */
+    height: calc(100vh - 60px);
+    height: calc(100dvh - 60px); /* Use dynamic viewport height */
     background: linear-gradient(
       180deg,
       rgba(245, 247, 250, 0.98) 0%,
@@ -802,11 +851,12 @@ select:focus-visible {
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
     border-right: 1px solid rgba(209, 217, 230, 0.5);
-    padding: 2rem 1.5rem;
-    padding-bottom: 3rem;
+    padding: 1.25rem 1rem;
+    padding-bottom: 2rem;
+    padding-top: 4.5rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.75rem;
     box-shadow:
       8px 0 24px rgba(163, 177, 198, 0.4),
       inset 1px 0 0 rgba(255, 255, 255, 0.8);
@@ -856,8 +906,10 @@ select:focus-visible {
   .brand {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.3rem 0.6rem;
+    gap: 0.6rem;
+    padding: 0.5rem 0.8rem;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .brand-name {
@@ -870,8 +922,9 @@ select:focus-visible {
 
   /* Enhanced mobile navigation links for sidebar with better touch targets */
   .nav-links .nav-link {
-    padding: 1.1rem 1.4rem;
-    border-radius: 16px;
+    padding: 1rem 1.2rem;
+    min-height: 48px;
+    border-radius: 14px;
     color: var(--text);
     position: relative;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -882,13 +935,15 @@ select:focus-visible {
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 1.2rem;
+    gap: 1rem;
     overflow: hidden;
     box-shadow:
       5px 5px 10px rgba(163, 177, 198, 0.3),
       -5px -5px 10px rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
     transform: translateZ(0);
     width: 100%;
     box-shadow:
@@ -1308,158 +1363,134 @@ select:focus-visible {
 }
 
 /* Dynamic floating objects for full-screen live background */
-.home-hero .floating-objects {
+/* Modern Floating Tech Icons */
+.floating-tech-icons {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: -1;
+  z-index: 0;
   overflow: hidden;
 }
 
-.home-hero .floating-objects::before,
-.home-hero .floating-objects::after,
-.home-hero .floating-objects .object-1,
-.home-hero .floating-objects .object-2,
-.home-hero .floating-objects .object-3,
-.home-hero .floating-objects .object-4,
-.home-hero .floating-objects .object-5,
-.home-hero .floating-objects .object-6,
-.home-hero .floating-objects .object-7,
-.home-hero .floating-objects .object-8,
-.home-hero .floating-objects .object-9,
-.home-hero .floating-objects .object-10,
-.home-hero .floating-objects .object-11,
-.home-hero .floating-objects .object-12,
-.home-hero .floating-objects .object-13,
-.home-hero .floating-objects .object-14,
-.home-hero .floating-objects .object-15 {
-  content: "";
+.floating-icon {
   position: absolute;
-  border-radius: 50%;
-  background: linear-gradient(
-    45deg,
-    rgba(255, 77, 148, 0.3),
-    rgba(0, 255, 198, 0.3)
-  );
-  animation: floatObject linear infinite;
+  font-size: 3rem;
+  opacity: 0.15;
+  animation: floatIcon 20s ease-in-out infinite;
+  color: var(--primary);
+  filter: blur(0.5px);
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
-/* Technology-themed floating objects */
-.home-hero .floating-objects .object-1 {
-  width: 80px;
-  height: 80px;
+.floating-icon svg {
+  filter: drop-shadow(0 0 10px currentColor);
+}
+
+/* Icon Positions */
+.floating-icon.icon-1 {
   top: 10%;
   left: 5%;
   animation-duration: 25s;
-  animation-delay: 0s;
-  background: rgba(245, 247, 250, 0.8);
-  border-radius: 50% 20% 50% 80%;
-  box-shadow:
-    6px 6px 12px rgba(163, 177, 198, 0.4),
-    -6px -6px 12px rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(5px);
+  color: #61dafb;
 }
 
-.home-hero .floating-objects .object-2 {
-  width: 60px;
-  height: 60px;
+.floating-icon.icon-2 {
   top: 20%;
   right: 8%;
   animation-duration: 30s;
   animation-delay: -5s;
-  background: linear-gradient(135deg, #f7df1e 0%, #e6c914 100%);
-  border-radius: 20% 80% 70% 30%;
-  box-shadow: 0 0 15px rgba(247, 223, 30, 0.5);
-  /* JavaScript yellow theme */
+  color: #f7df1e;
 }
 
-.home-hero .floating-objects .object-2::after {
-  content: "JS";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #333;
-  font-weight: bold;
-  font-size: 14px;
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
-}
-
-.home-hero .floating-objects .object-3 {
-  width: 100px;
-  height: 100px;
+.floating-icon.icon-3 {
   bottom: 15%;
   left: 10%;
   animation-duration: 35s;
   animation-delay: -10s;
-  background: linear-gradient(45deg, #339933 0%, #2d7d2d 100%);
-  border-radius: 80% 20% 50% 50%;
-  box-shadow: 0 0 25px rgba(51, 153, 51, 0.4);
-  /* Node.js green theme */
+  color: #68a063;
 }
 
-.home-hero .floating-objects .object-3::before {
-  content: "";
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(45deg, #68c847 0%, #339933 100%);
-  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-  transform: translateX(-50%);
-  animation: nodePulse 2s ease-in-out infinite;
-}
-
-.home-hero .floating-objects .object-4 {
-  width: 70px;
-  height: 70px;
+.floating-icon.icon-4 {
   top: 40%;
   right: 15%;
   animation-duration: 28s;
   animation-delay: -15s;
-  background: linear-gradient(135deg, #007acc 0%, #005a9e 100%);
-  border-radius: 30% 70% 60% 40%;
-  box-shadow: 0 0 18px rgba(0, 122, 204, 0.5);
-  /* TypeScript blue theme */
+  color: #47a248;
 }
 
-.home-hero .floating-objects .object-4::after {
-  content: "TS";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-weight: bold;
-  font-size: 12px;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-.home-hero .floating-objects .object-5 {
-  width: 90px;
-  height: 90px;
+.floating-icon.icon-5 {
   bottom: 25%;
   right: 5%;
   animation-duration: 32s;
   animation-delay: -8s;
-  background: linear-gradient(45deg, #47a248 0%, #3d8b3d 100%);
-  border-radius: 50% 80% 20% 60%;
-  box-shadow: 0 0 22px rgba(71, 162, 72, 0.4);
-  /* MongoDB green theme */
+  color: #306998;
 }
 
-.home-hero .floating-objects .object-5::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 30px;
-  height: 30px;
-  background: #47a248;
-  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-  transform: translate(-50%, -50%) rotate(180deg);
-  animation: mongoRotate 4s linear infinite;
+.floating-icon.icon-6 {
+  top: 60%;
+  left: 15%;
+  animation-duration: 27s;
+  animation-delay: -12s;
+  color: #f29111;
+}
+
+.floating-icon.icon-7 {
+  top: 70%;
+  right: 20%;
+  animation-duration: 33s;
+  animation-delay: -18s;
+  color: #f05032;
+}
+
+.floating-icon.icon-8 {
+  top: 30%;
+  left: 20%;
+  animation-duration: 29s;
+  animation-delay: -7s;
+  color: #7952b3;
+}
+
+.floating-icon.icon-9 {
+  bottom: 40%;
+  right: 25%;
+  animation-duration: 31s;
+  animation-delay: -14s;
+  color: #0db7ed;
+}
+
+@keyframes floatIcon {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    opacity: 0.15;
+  }
+  25% {
+    transform: translate3d(20px, -20px, 0) rotate(5deg) scale(1.1);
+    opacity: 0.25;
+  }
+  50% {
+    transform: translate3d(-15px, -40px, 0) rotate(-5deg) scale(1.05);
+    opacity: 0.2;
+  }
+  75% {
+    transform: translate3d(-25px, -15px, 0) rotate(3deg) scale(1.15);
+    opacity: 0.18;
+  }
+}
+
+@media (max-width: 768px) {
+  .floating-icon {
+    font-size: 2rem;
+    opacity: 0.1;
+  }
+  
+  .floating-icon.icon-6,
+  .floating-icon.icon-7,
+  .floating-icon.icon-8,
+  .floating-icon.icon-9 {
+    display: none;
+  }
 }
 
 .home-hero .floating-objects .object-6 {
@@ -2906,5 +2937,89 @@ body {
   .card {
     break-inside: avoid;
     page-break-inside: avoid;
+  }
+}
+
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .floating-icon {
+    animation: none !important;
+  }
+}
+
+/* GPU Acceleration for common elements */
+.card,
+.nav-link,
+.btn,
+img,
+.hero-title,
+.project-card {
+  transform: translateZ(0);
+  will-change: auto;
+}
+
+/* Optimize images */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Lazy load animations */
+@media (prefers-reduced-motion: no-preference) {
+  .nav-link,
+  .floating-icon,
+  .card {
+    animation-play-state: running;
+  }
+}
+
+/* Mobile performance optimizations */
+@media (max-width: 768px) {
+  * {
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+  
+  /* Simplify shadows on mobile */
+  .nav-link,
+  .card,
+  .btn {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  /* Reduce blur effects on mobile */
+  .floating-icon {
+    filter: none;
+  }
+  
+  /* Faster transitions on mobile */
+  * {
+    transition-duration: 0.15s !important;
+  }
+}
+
+/* Content visibility for off-screen content */
+.card,
+.project-card,
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+
+/* Optimize font loading */
+@media (prefers-reduced-data: reduce) {
+  * {
+    font-family: system-ui, -apple-system, sans-serif !important;
   }
 }

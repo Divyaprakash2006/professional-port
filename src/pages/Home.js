@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import resume from "../data/resume";
 import Typewriter from "../components/Typewriter";
 import profilePhoto from "../photo-10.jpg";
+import { FaReact, FaNodeJs, FaPython, FaDatabase, FaCode, FaServer } from "react-icons/fa";
+import { SiJavascript, SiMongodb, SiGit } from "react-icons/si";
 
 // Home shows dynamic typed name then the professional summary
 
@@ -155,14 +157,35 @@ function Home() {
         )}
       </div>
 
-      {/* Dynamic floating objects for full-screen background */}
-      <div className="floating-objects">
-        <div className="object-1"></div>
-        <div className="object-2"></div>
-        <div className="object-3"></div>
-        <div className="object-4"></div>
-        <div className="object-5"></div>
-        <div className="object-8"></div>
+      {/* Modern Floating Tech Icons */}
+      <div className="floating-tech-icons">
+        <div className="floating-icon icon-1">
+          <FaReact />
+        </div>
+        <div className="floating-icon icon-2">
+          <SiJavascript />
+        </div>
+        <div className="floating-icon icon-3">
+          <FaNodeJs />
+        </div>
+        <div className="floating-icon icon-4">
+          <SiMongodb />
+        </div>
+        <div className="floating-icon icon-5">
+          <FaPython />
+        </div>
+        <div className="floating-icon icon-6">
+          <FaDatabase />
+        </div>
+        <div className="floating-icon icon-7">
+          <SiGit />
+        </div>
+        <div className="floating-icon icon-8">
+          <FaCode />
+        </div>
+        <div className="floating-icon icon-9">
+          <FaServer />
+        </div>
       </div>
     </section>
   );
