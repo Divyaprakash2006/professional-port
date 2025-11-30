@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import resume from "../data/resume";
 import Typewriter from "../components/Typewriter";
 import profilePhoto from "../photo-10.jpg";
@@ -9,17 +9,6 @@ import { SiJavascript, SiMongodb, SiGit } from "react-icons/si";
 
 function Home() {
   const [showSummary, setShowSummary] = useState(false);
-
-  useEffect(() => {
-    const prevBodyOverflow = document.body.style.overflow;
-    const prevHtmlOverflow = document.documentElement.style.overflow;
-    document.body.style.overflow = "hidden";
-    document.documentElement.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prevBodyOverflow;
-      document.documentElement.style.overflow = prevHtmlOverflow;
-    };
-  }, []);
 
   return (
     <section
